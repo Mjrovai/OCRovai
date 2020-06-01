@@ -7,3 +7,5 @@ This web app was developed in Flask and based on pytesseract, a wrapper for Goog
 
 The final app is deployed in Heroku:
  - https://ocrovai.herokuapp.com
+<h3> Example </h3>
+<img src="10_Development/images/OCR_result_filter_no_filter.png"/>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+   <head>
+	  <link rel="icon" href="../static/MJRoBot_Avatar_1.jpg">
+	  <meta charset="UTF-8">
+      <title>OCRovai</title>
+      <link rel="stylesheet" href='../static/style.css'/>
+       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style>
+          body {
+                background: #1D5292;
+                color: white;
+                text-align: center;
+                font-family: Arial;
+            }
+            p {
+                display: block;
+                margin-top: 0;
+                margin-bottom: 1%;
+                margin-left: 5%;
+                margin-right: 2%;
+              }
+
+            input[type=text], select {
+              font-size: 14px;
+              padding: 6px 10px;
+              margin: 4px 0;
+              display: inline-block;
+              border: 1px solid #ccc;
+              border-radius: 2px;
+              box-sizing: border-box;
+            }
+
+            input[type=file], select {
+              font-size: 14px;
+              margin: 4px 0;
+              display: inline-block;
+              padding: 7px 10px;
+              margin: 4px 0;
+              border: none;
+              border-radius: 2px;
+            }
+
+            input[type=submit] {
+              font-size: 14px;
+              background-color: #4CAF50;
+              color: white;
+              padding: 7px 10px;
+              margin: 4px 0;
+              border: none;
+              border-radius: 2px;
+              cursor: pointer;
+            }
+
+            input[type=submit]:hover {
+              background-color: #45a049;
+            }
+
+            div {
+              border-radius: 5px;
+              background-color: #6385CB;
+              padding: 20px;
+            }
+        </style>
+   </head>
+
+ <body>
+	 <img src="{{ url_for('static', filename='OCRovai.png')}}" width="30%"/>
+    <h1>Multilanguage OCR using AI</h1>
+    <hr>
+  <div>
+	<form action="{{ url_for('query') }}" method = "POST" enctype = "multipart/form-data">
+
+    <p> Image filters:
+      <input type="radio" name="filter" id="on" value="on"> ON </input>
+      <input type="radio" name="filter" id="off" value="off" checked> OFF </input>
+    </p>
+
+    <input type = "file" name = "file" />
+
+        <select name="language">
+          <option value="eng">English</option>
+          <option value="spa">Spanish</option>
+          <option value="por">Portuguese</option>
+          <option value="deu" selected>German</option>
+          <option value="fra">French</option>
+          <option value="ita">Italian</option>
+          <option value="rus">Russian</option>
+          <option value="dan">Danish</option>
+          <option value="jpn">Japonese</option>
+          <option value="kor">Korean</option>
+        </select>
+        <label> language      </label>
+
+        <input type = "submit"/>
+
+  </form>
+</div>
+
+
+
+    <hr>
+    <br>
+    <h2>Recognition result:</h2>
+
+    <h1 style="color:yellow;"> [{{prediction}}]    </h1>
+
+    <br>
+    <table style="width:100%", align="center" border = 1>
+        <tr>
+          <th>Image File Name: {{filename}} </th>
+          <th>OCR result with Filter [ {{ filter }} ] and language [ {{ lang }} ]</th>
+        </tr>
+        <tr>
+          <td style="width:50%"><img src="{{ image }}", width="90%"/></td>
+          <td style="width:50%", align="left">
+              {% for line in text %}
+                  <p>{{ line }}</p>
+              {% endfor %}
+          </td>
+        </tr>
+        <tr>
+          <td> Text in [OCR Result] must be manually copied to ClipBoard with [CRTL]+[C]</td>
+          <td>
+              <form action="https://translate.google.com">
+                <input type="submit" value="Google Translator"  align="center"/>
+              </form>
+          </td>
+
+        </tr>
+      </table>
+
+     <p> @2020 Marcelo Rovai - MJRoBot.org</p>
+
+   </body>
+</html>
